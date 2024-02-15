@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbip4slyeaxxa"]
+
+[ext_resource type="Texture2D" uid="uid://bng3b2m0cskmv" path="res://icon.svg" id="1_2r5pt"]
+[ext_resource type="Script" path="res://Soldiers/soldier.gd" id="1_6ngcs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ekn1m"]
+radius = 32.0156
+
+[node name="Soldier" type="Area2D"]
+script = ExtResource("1_6ngcs")
+
+[node name="Icon" type="Sprite2D" parent="."]
+modulate = Color(0.0196078, 0.329412, 0.0588235, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_2r5pt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ekn1m")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
