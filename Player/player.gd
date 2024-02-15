@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 signal soldier_collected()
 signal soldier_dropped()
+signal _on_obstacle_hit()
 
 @export var speed : float = 200.
 @export var gravity := 200.
@@ -20,4 +21,4 @@ func _process(delta):
 	move_and_collide(velocity * delta)
 	
 func obstacle_hit():
-	pass
+	_on_obstacle_hit.emit()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bhr3sshyyj6og"]
+[gd_scene load_steps=6 format=3 uid="uid://bhr3sshyyj6og"]
 
 [ext_resource type="PackedScene" uid="uid://b24wal0nj1boq" path="res://Player/Player.tscn" id="1_1qo66"]
 [ext_resource type="PackedScene" uid="uid://bbip4slyeaxxa" path="res://Soldiers/Soldier.tscn" id="2_sh77r"]
 [ext_resource type="PackedScene" uid="uid://bviilad5imam6" path="res://objects/hangar.tscn" id="3_qycnw"]
 [ext_resource type="Script" path="res://Levels/ui.gd" id="4_jucwd"]
+[ext_resource type="PackedScene" uid="uid://lgog3ux5o460" path="res://objects/tree.tscn" id="5_4b11x"]
 
 [node name="Main" type="Node2D"]
 
@@ -38,5 +39,9 @@ offset_right = 163.0
 offset_bottom = 63.0
 text = "Soldiers returned: 0"
 
+[node name="Tree" parent="." instance=ExtResource("5_4b11x")]
+position = Vector2(482, 435)
+
+[connection signal="_on_obstacle_hit" from="Player" to="UI" method="_on_player__on_obstacle_hit"]
 [connection signal="soldier_collected" from="Player" to="UI" method="_on_player_soldier_collected"]
 [connection signal="soldier_dropped" from="Player" to="UI" method="_on_player_soldier_dropped"]
