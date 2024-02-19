@@ -1,25 +1,32 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhr3sshyyj6og"]
+[gd_scene load_steps=7 format=3 uid="uid://bhr3sshyyj6og"]
 
 [ext_resource type="PackedScene" uid="uid://b24wal0nj1boq" path="res://Player/Player.tscn" id="1_1qo66"]
 [ext_resource type="PackedScene" uid="uid://bbip4slyeaxxa" path="res://Soldiers/Soldier.tscn" id="2_sh77r"]
 [ext_resource type="PackedScene" uid="uid://bviilad5imam6" path="res://objects/hangar.tscn" id="3_qycnw"]
 [ext_resource type="Script" path="res://Levels/ui.gd" id="4_jucwd"]
-[ext_resource type="PackedScene" uid="uid://lgog3ux5o460" path="res://objects/tree.tscn" id="5_4b11x"]
+[ext_resource type="Script" path="res://Levels/tree_generator.gd" id="6_bddp8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s31d0"]
+size = Vector2(788, 508)
 
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_1qo66")]
 
 [node name="Soldier" parent="." instance=ExtResource("2_sh77r")]
+visible = false
 position = Vector2(726, 201)
 
 [node name="Soldier2" parent="." instance=ExtResource("2_sh77r")]
+visible = false
 position = Vector2(637, 307)
 
 [node name="Soldier3" parent="." instance=ExtResource("2_sh77r")]
+visible = false
 position = Vector2(376, 128)
 
 [node name="Hangar" parent="." instance=ExtResource("3_qycnw")]
+visible = false
 position = Vector2(9, 158)
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -39,8 +46,13 @@ offset_right = 163.0
 offset_bottom = 63.0
 text = "Soldiers returned: 0"
 
-[node name="Tree" parent="." instance=ExtResource("5_4b11x")]
-position = Vector2(482, 435)
+[node name="TreeGenerator" type="Area2D" parent="."]
+position = Vector2(758, 254)
+script = ExtResource("6_bddp8")
+
+[node name="Bounds" type="CollisionShape2D" parent="TreeGenerator"]
+shape = SubResource("RectangleShape2D_s31d0")
+debug_color = Color(0, 0.701961, 0.313726, 0.419608)
 
 [connection signal="_on_obstacle_hit" from="Player" to="UI" method="_on_player__on_obstacle_hit"]
 [connection signal="soldier_collected" from="Player" to="UI" method="_on_player_soldier_collected"]
