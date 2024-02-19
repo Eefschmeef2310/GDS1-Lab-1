@@ -46,11 +46,13 @@ offset_right = 163.0
 offset_bottom = 63.0
 text = "Soldiers returned: 0"
 
-[node name="TreeGenerator" type="Area2D" parent="."]
+[node name="ObjectGenerator" type="Area2D" parent="."]
 position = Vector2(758, 254)
 script = ExtResource("6_bddp8")
+tree_count = 2
+soldier_count = 2
 
-[node name="Bounds" type="CollisionShape2D" parent="TreeGenerator"]
+[node name="Bounds" type="CollisionShape2D" parent="ObjectGenerator"]
 shape = SubResource("RectangleShape2D_s31d0")
 debug_color = Color(0, 0.701961, 0.313726, 0.419608)
 

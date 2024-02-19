@@ -14,7 +14,7 @@ var soldiers_carrying : int:
 
 func _process(delta):
 	var direction = Input.get_vector("Left", "Right", "Up", "Down")
-	velocity = direction * (speed - 30 * soldiers_carrying)
+	velocity = direction * max((speed - 30 * soldiers_carrying), 60)
 	
 	velocity.y += gravity
 	
