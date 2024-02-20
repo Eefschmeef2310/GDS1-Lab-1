@@ -9,6 +9,7 @@ height = 128.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_cy82r")
+speed = 500.0
 gravity = 50.0
 
 [node name="Icon" type="Sprite2D" parent="."]
@@ -20,4 +21,3 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_1rxqh")
 
 [connection signal="soldier_collected" from="." to="." method="_on_soldier_collected"]
-[connection signal="soldier_dropped" from="." to="." method="_on_soldier_dropped"]

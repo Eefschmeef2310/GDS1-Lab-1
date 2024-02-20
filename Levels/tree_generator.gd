@@ -34,7 +34,7 @@ func _ready():
 		instantiate_object(SOLDIER)
 
 #for debugging purposes
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		reset()
 		_ready()
@@ -46,7 +46,7 @@ func instantiate_object(object_to_create):
 	while check_overlap(random_position, object):
 		random_position = get_random_position()
 	object.position = global_position + random_position
-	get_tree().root.add_child.call_deferred(object)
+	get_parent().add_child.call_deferred(object)
 	objects.append(object)
 
 func check_overlap(pos, tree : CollisionObject2D):

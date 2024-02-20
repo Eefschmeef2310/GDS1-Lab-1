@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 signal soldier_collected()
-signal soldier_dropped()
 signal _on_obstacle_hit()
 
 @export var speed : float = 200.

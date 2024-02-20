@@ -22,7 +22,8 @@ folder_colors={
 "res://Soldiers/": "orange",
 "res://menus/": "purple",
 "res://objects/": "yellow",
-"res://tank/": "pink"
+"res://tank/": "pink",
+"res://ui/": "blue"
 }
 
 [input]

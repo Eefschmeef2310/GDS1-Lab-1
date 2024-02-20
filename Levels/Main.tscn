@@ -1,34 +1,24 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhr3sshyyj6og"]
+[gd_scene load_steps=6 format=3 uid="uid://bhr3sshyyj6og"]
 
 [ext_resource type="PackedScene" uid="uid://b24wal0nj1boq" path="res://Player/Player.tscn" id="1_1qo66"]
-[ext_resource type="PackedScene" uid="uid://bbip4slyeaxxa" path="res://Soldiers/Soldier.tscn" id="2_sh77r"]
-[ext_resource type="PackedScene" uid="uid://bviilad5imam6" path="res://objects/hangar.tscn" id="3_qycnw"]
+[ext_resource type="PackedScene" uid="uid://dhda8lqqc5002" path="res://Levels/level_container.tscn" id="1_d4k43"]
+[ext_resource type="Script" path="res://Levels/main.gd" id="1_r1k2k"]
 [ext_resource type="Script" path="res://Levels/ui.gd" id="4_jucwd"]
-[ext_resource type="Script" path="res://Levels/tree_generator.gd" id="6_bddp8"]
-[ext_resource type="PackedScene" uid="uid://ccamedb07wdd5" path="res://tank/tank.tscn" id="6_oydsd"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s31d0"]
-size = Vector2(788, 508)
+[ext_resource type="Script" path="res://Levels/camera.gd" id="7_kjuxp"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_r1k2k")
+
+[node name="LevelContainer" parent="." instance=ExtResource("1_d4k43")]
+
+[node name="Wall" type="StaticBody2D" parent="."]
+process_mode = 4
+
+[node name="WallShape" type="CollisionPolygon2D" parent="Wall"]
+polygon = PackedVector2Array(0, -21, 1162, -11, 1152, 648, 0, 648, -24, 0, 0, 0, 0, 465, 1152, 463, 1152, 0, 0, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_1qo66")]
-
-[node name="Soldier" parent="." instance=ExtResource("2_sh77r")]
-visible = false
-position = Vector2(726, 201)
-
-[node name="Soldier2" parent="." instance=ExtResource("2_sh77r")]
-visible = false
-position = Vector2(637, 307)
-
-[node name="Soldier3" parent="." instance=ExtResource("2_sh77r")]
-visible = false
-position = Vector2(376, 128)
-
-[node name="Hangar" parent="." instance=ExtResource("3_qycnw")]
-visible = false
-position = Vector2(9, 158)
+position = Vector2(206, 181)
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("4_jucwd")
@@ -47,19 +37,15 @@ offset_right = 163.0
 offset_bottom = 63.0
 text = "Soldiers returned: 0"
 
-[node name="ObjectGenerator" type="Area2D" parent="."]
-position = Vector2(758, 254)
-script = ExtResource("6_bddp8")
-tree_count = 2
-soldier_count = 2
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+position_smoothing_enabled = true
+script = ExtResource("7_kjuxp")
 
-[node name="Bounds" type="CollisionShape2D" parent="ObjectGenerator"]
-shape = SubResource("RectangleShape2D_s31d0")
-debug_color = Color(0, 0.701961, 0.313726, 0.419608)
-
-[node name="tank" parent="." instance=ExtResource("6_oydsd")]
-position = Vector2(250, 569)
-
+[connection signal="level_complete" from="LevelContainer" to="." method="_on_level_container_level_complete"]
+[connection signal="soldier_dropped" from="LevelContainer/Hangar" to="UI" method="_on_hangar_soldier_dropped"]
 [connection signal="_on_obstacle_hit" from="Player" to="UI" method="_on_player__on_obstacle_hit"]
 [connection signal="soldier_collected" from="Player" to="UI" method="_on_player_soldier_collected"]
-[connection signal="soldier_dropped" from="Player" to="UI" method="_on_player_soldier_dropped"]
+
+[editable path="LevelContainer"]
+[editable path="LevelContainer/tank"]
