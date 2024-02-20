@@ -1,21 +1,54 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhr3sshyyj6og"]
+[gd_scene load_steps=10 format=3 uid="uid://bhr3sshyyj6og"]
 
 [ext_resource type="PackedScene" uid="uid://b24wal0nj1boq" path="res://Player/Player.tscn" id="1_1qo66"]
 [ext_resource type="PackedScene" uid="uid://dhda8lqqc5002" path="res://Levels/level_container.tscn" id="1_d4k43"]
 [ext_resource type="Script" path="res://Levels/main.gd" id="1_r1k2k"]
+[ext_resource type="Script" path="res://Levels/walls.gd" id="2_w6ap7"]
 [ext_resource type="Script" path="res://Levels/ui.gd" id="4_jucwd"]
 [ext_resource type="Script" path="res://Levels/camera.gd" id="7_kjuxp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s2djx"]
+size = Vector2(1152, 39)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fjjmu"]
+size = Vector2(38, 648)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hrlju"]
+size = Vector2(38, 648)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_r1k2k")
 
+[node name="Walls" type="Node2D" parent="."]
+script = ExtResource("2_w6ap7")
+
+[node name="Top" type="StaticBody2D" parent="Walls"]
+position = Vector2(576, -19)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Top"]
+shape = SubResource("RectangleShape2D_s2djx")
+
+[node name="Bottom" type="StaticBody2D" parent="Walls"]
+position = Vector2(572, 668)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Bottom"]
+shape = SubResource("RectangleShape2D_s2djx")
+
+[node name="Left" type="StaticBody2D" parent="Walls"]
+position = Vector2(-20, 324)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Left"]
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_fjjmu")
+
+[node name="Right" type="StaticBody2D" parent="Walls"]
+position = Vector2(1169, 324)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Right"]
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_hrlju")
+
 [node name="LevelContainer" parent="." instance=ExtResource("1_d4k43")]
-
-[node name="Wall" type="StaticBody2D" parent="."]
-process_mode = 4
-
-[node name="WallShape" type="CollisionPolygon2D" parent="Wall"]
-polygon = PackedVector2Array(0, -21, 1162, -11, 1152, 648, 0, 648, -24, 0, 0, 0, 0, 465, 1152, 463, 1152, 0, 0, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_1qo66")]
 position = Vector2(206, 181)
