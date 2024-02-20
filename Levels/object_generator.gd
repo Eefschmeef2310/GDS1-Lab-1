@@ -5,11 +5,14 @@ extends Area2D
 
 const TREE = preload("res://objects/tree.tscn")
 const SOLDIER = preload("res://Soldiers/Soldier.tscn")
+const TANK = preload("res://tank/tank.tscn")
 
 @onready var bounds = $Bounds
+@onready var tank_marker = $"../TankMarker"
 
 var circles : Array[Circle]
 var objects : Array[CollisionObject2D]
+var tank : Node2D
 
 #Circle class to prevent intersecting objects
 class Circle:
@@ -24,7 +27,7 @@ class Circle:
 			return true
 		return false
 
-func _ready():
+func generate_level():
 	#Generate trees
 	for i in tree_count:
 		instantiate_object(TREE)
@@ -32,12 +35,18 @@ func _ready():
 	#Generate soldiers
 	for i in soldier_count:
 		instantiate_object(SOLDIER)
+		
+	#Generate tank
+	tank = TANK.instantiate()
+	tank.global_position = tank_marker.global_position
+	get_parent().add_child.call_deferred(tank)
+	get_parent().level_complete.connect(tank.destroy)
 
 #for debugging purposes
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		reset()
-		_ready()
+		generate_level()
 		
 #Create object and ensure they don't overlap
 func instantiate_object(object_to_create):
@@ -45,7 +54,7 @@ func instantiate_object(object_to_create):
 	var random_position = get_random_position()
 	while check_overlap(random_position, object):
 		random_position = get_random_position()
-	object.position = global_position + random_position
+	object.position = position + random_position
 	get_parent().add_child.call_deferred(object)
 	objects.append(object)
 
@@ -67,3 +76,7 @@ func reset():
 		i.queue_free()
 	objects.clear()
 	circles.clear()
+	tank.queue_free()
+
+func _on_level_container_generate_level():
+	generate_level()

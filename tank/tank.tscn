@@ -1,33 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccamedb07wdd5"]
+[gd_scene load_steps=3 format=3 uid="uid://ccamedb07wdd5"]
 
 [ext_resource type="Texture2D" uid="uid://bng3b2m0cskmv" path="res://icon.svg" id="1_q6apc"]
-[ext_resource type="Script" path="res://tank/tank_path.gd" id="1_ya2lv"]
 [ext_resource type="Script" path="res://tank/tank.gd" id="3_tj4ns"]
 
-[sub_resource type="Curve2D" id="Curve2D_rmqh1"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1152, 0)
-}
-point_count = 2
-
 [node name="tank" type="Node2D"]
-
-[node name="Path2D" type="Path2D" parent="."]
-curve = SubResource("Curve2D_rmqh1")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(576, 0)
-progress = 576.0
-cubic_interp = false
-script = ExtResource("1_ya2lv")
-speed = 0.25
-
-[node name="Tank" type="Sprite2D" parent="Path2D/PathFollow2D"]
-texture = ExtResource("1_q6apc")
 script = ExtResource("3_tj4ns")
 
-[node name="Timer" type="Timer" parent="Path2D/PathFollow2D/Tank"]
+[node name="Tank" type="Sprite2D" parent="."]
+texture = ExtResource("1_q6apc")
+
+[node name="Timer" type="Timer" parent="Tank"]
 one_shot = true
 autostart = true
 
-[connection signal="timeout" from="Path2D/PathFollow2D/Tank/Timer" to="Path2D/PathFollow2D/Tank" method="_on_timer_timeout"]
+[connection signal="timeout" from="Tank/Timer" to="." method="_on_timer_timeout"]

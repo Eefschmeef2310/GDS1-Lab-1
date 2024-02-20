@@ -11,4 +11,4 @@ func _ready():
 	process_mode = Node.PROCESS_MODE_INHERIT if player else PROCESS_MODE_DISABLED
 
 func _process(delta):
-	progress = lerp(progress, player.position.x, speed * delta)
+	progress = lerp(progress, player.global_position.x, speed * delta)

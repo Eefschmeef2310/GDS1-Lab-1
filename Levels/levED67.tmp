@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Levels/level.gd" id="1_07ib8"]
 [ext_resource type="Script" path="res://Levels/color_rect_test.gd" id="2_ijxfe"]
 [ext_resource type="PackedScene" uid="uid://bviilad5imam6" path="res://objects/hangar.tscn" id="2_ysakb"]
-[ext_resource type="Script" path="res://Levels/object_generator.gd" id="4_jsxh1"]
+[ext_resource type="Script" path="res://Levels/tree_generator.gd" id="3_ubmo6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s31d0"]
 size = Vector2(788, 464)
@@ -21,7 +21,7 @@ position = Vector2(9, 158)
 
 [node name="ObjectGenerator" type="Area2D" parent="."]
 position = Vector2(758, 254)
-script = ExtResource("4_jsxh1")
+script = ExtResource("3_ubmo6")
 tree_count = 2
 soldier_count = 2
 
@@ -34,7 +34,7 @@ debug_color = Color(0, 0.701961, 0.313726, 0.419608)
 position = Vector2(576, 569)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(576, 324.5)
-scale = Vector2(57.5, 32.25)
+position = Vector2(576, 324)
+scale = Vector2(57.6, 32.4)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

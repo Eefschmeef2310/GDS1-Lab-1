@@ -42,6 +42,7 @@ position = Vector2(576, 324)
 position_smoothing_enabled = true
 script = ExtResource("7_kjuxp")
 
+[connection signal="level_complete" from="LevelContainer" to="." method="_on_level_container_level_complete"]
 [connection signal="soldier_dropped" from="LevelContainer/Hangar" to="UI" method="_on_hangar_soldier_dropped"]
 [connection signal="_on_obstacle_hit" from="Player" to="UI" method="_on_player__on_obstacle_hit"]
 [connection signal="soldier_collected" from="Player" to="UI" method="_on_player_soldier_collected"]

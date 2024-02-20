@@ -8,6 +8,8 @@ const LEVEL_COMPLETE_UI = preload("res://ui/level_complete_ui.tscn")
 
 func _ready():
 	hangar.soldier_dropped.connect(_soldier_released)
+	get_parent().generate_level.connect(generate_objects)
+	get_parent().init_new_level(self)
 
 func _soldier_released():
 	if !get_tree().get_nodes_in_group("soldier").size():
@@ -16,3 +18,7 @@ func _soldier_released():
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
+
+func generate_objects():
+	get_parent().generate_level.disconnect(generate_objects)
+	$ObjectGenerator.generate_level()
