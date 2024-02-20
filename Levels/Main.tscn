@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bhr3sshyyj6og"]
+[gd_scene load_steps=8 format=3 uid="uid://bhr3sshyyj6og"]
 
 [ext_resource type="PackedScene" uid="uid://b24wal0nj1boq" path="res://Player/Player.tscn" id="1_1qo66"]
 [ext_resource type="PackedScene" uid="uid://bbip4slyeaxxa" path="res://Soldiers/Soldier.tscn" id="2_sh77r"]
 [ext_resource type="PackedScene" uid="uid://bviilad5imam6" path="res://objects/hangar.tscn" id="3_qycnw"]
 [ext_resource type="Script" path="res://Levels/ui.gd" id="4_jucwd"]
 [ext_resource type="Script" path="res://Levels/tree_generator.gd" id="6_bddp8"]
+[ext_resource type="PackedScene" uid="uid://ccamedb07wdd5" path="res://tank/tank.tscn" id="6_oydsd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s31d0"]
 size = Vector2(788, 508)
@@ -55,6 +56,9 @@ soldier_count = 2
 [node name="Bounds" type="CollisionShape2D" parent="ObjectGenerator"]
 shape = SubResource("RectangleShape2D_s31d0")
 debug_color = Color(0, 0.701961, 0.313726, 0.419608)
+
+[node name="tank" parent="." instance=ExtResource("6_oydsd")]
+position = Vector2(250, 569)
 
 [connection signal="_on_obstacle_hit" from="Player" to="UI" method="_on_player__on_obstacle_hit"]
 [connection signal="soldier_collected" from="Player" to="UI" method="_on_player_soldier_collected"]
