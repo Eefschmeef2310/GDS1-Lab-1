@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b24wal0nj1boq"]
+[gd_scene load_steps=5 format=3 uid="uid://b24wal0nj1boq"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_cy82r"]
 [ext_resource type="Texture2D" uid="uid://bng3b2m0cskmv" path="res://icon.svg" id="1_g2kxu"]
+[ext_resource type="AudioStream" uid="uid://yknu0ncyhi63" path="res://audio/sfx/helicopter-rotor-sound-effectpart-2-pixabay.mp3" id="3_72fwg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1rxqh"]
 radius = 29.0
@@ -10,14 +11,19 @@ height = 128.0
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_cy82r")
 speed = 500.0
-gravity = 50.0
+gravity = 9.8
+rotation_clamp = 10.0
 
 [node name="Icon" type="Sprite2D" parent="."]
 scale = Vector2(1, 0.453125)
 texture = ExtResource("1_g2kxu")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Collider" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_1rxqh")
+
+[node name="Rotor" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_72fwg")
+volume_db = -10.0
 
 [connection signal="soldier_collected" from="." to="." method="_on_soldier_collected"]

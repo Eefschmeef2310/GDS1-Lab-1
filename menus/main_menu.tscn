@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://c22bxnpm6pj13"]
+[gd_scene load_steps=4 format=3 uid="uid://c22bxnpm6pj13"]
 
 [ext_resource type="Script" path="res://menus/main_menu.gd" id="1_ieh4o"]
+[ext_resource type="AudioStream" uid="uid://b800saemib6sh" path="res://audio/music/Menu March.mp3" id="2_m0twg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vr1p5"]
 font_size = 120
@@ -68,6 +69,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "QUIT"
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_m0twg")
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

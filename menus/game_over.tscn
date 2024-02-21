@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://0dtbc1fdtehg"]
+[gd_scene load_steps=4 format=3 uid="uid://0dtbc1fdtehg"]
 
 [ext_resource type="Script" path="res://menus/game_over.gd" id="1_qamp4"]
+[ext_resource type="AudioStream" uid="uid://dc6ra4vvpytfu" path="res://audio/sfx/crashing-pixabay.mp3" id="2_mx4r6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1lpw0"]
 font_size = 150
@@ -66,6 +67,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "Menu"
+
+[node name="GameOver" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_mx4r6")
+autoplay = true
 
 [connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]

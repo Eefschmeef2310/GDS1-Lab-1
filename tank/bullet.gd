@@ -6,7 +6,7 @@ func _process(delta):
 	position.y -= speed * delta
 	
 func _on_body_entered(body):
-	if body.is_in_group("player"):
+	if "obstacle_hit" in body:
 		body.obstacle_hit()
 		queue_free()
 

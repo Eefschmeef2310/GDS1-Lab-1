@@ -20,3 +20,5 @@ func _on_timer_timeout():
 	var bullet = BULLET.instantiate()
 	bullet.position = global_position
 	get_tree().root.add_child(bullet)
+	
+	$BulletShoot.play()
