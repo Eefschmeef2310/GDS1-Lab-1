@@ -38,4 +38,5 @@ process_mode = 4
 position = Vector2(576, 324.5)
 scale = Vector2(57.5, 32.25)
 
+[connection signal="soldier_dropped" from="Hangar" to="." method="_on_hangar_soldier_dropped"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

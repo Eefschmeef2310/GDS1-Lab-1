@@ -8,8 +8,12 @@ const LEVEL_CONTAINER = preload("res://Levels/level_container.tscn")
 
 func _ready():
 	generate_level.emit()
+	
+	for i in get_tree().get_nodes_in_group("bullet"):
+		i.queue_free()
 
 func _on_level_container_level_complete():
+	$UI.level_container_complete()
 	camera.moving = true
 	
 	var new_level = LEVEL_CONTAINER.instantiate()

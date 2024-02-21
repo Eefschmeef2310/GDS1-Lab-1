@@ -20,6 +20,7 @@ folder_colors={
 "res://Levels/": "blue",
 "res://Player/": "green",
 "res://Soldiers/": "orange",
+"res://audio/": "gray",
 "res://menus/": "purple",
 "res://objects/": "yellow",
 "res://tank/": "pink",
