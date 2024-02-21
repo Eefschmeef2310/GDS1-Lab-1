@@ -17,8 +17,10 @@ func _soldier_released():
 		level_complete.emit()
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
-	queue_free()
+	if $VisibleOnScreenNotifier2D.process_mode == PROCESS_MODE_INHERIT:
+		queue_free()
 
 func generate_objects():
+	$VisibleOnScreenNotifier2D.process_mode = Node.PROCESS_MODE_INHERIT
 	get_parent().generate_level.disconnect(generate_objects)
 	$ObjectGenerator.generate_level()
