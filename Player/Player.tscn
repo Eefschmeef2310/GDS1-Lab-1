@@ -1,22 +1,77 @@
-[gd_scene load_steps=5 format=3 uid="uid://b24wal0nj1boq"]
+[gd_scene load_steps=12 format=3 uid="uid://b24wal0nj1boq"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_cy82r"]
-[ext_resource type="Texture2D" uid="uid://bng3b2m0cskmv" path="res://icon.svg" id="1_g2kxu"]
 [ext_resource type="AudioStream" uid="uid://yknu0ncyhi63" path="res://audio/sfx/helicopter-rotor-sound-effectpart-2-pixabay.mp3" id="3_72fwg"]
+[ext_resource type="Texture2D" uid="uid://bq6j7lqwk4a23" path="res://sprites/helicopter-Sheet.png" id="3_r311c"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1rxqh"]
-radius = 29.0
-height = 128.0
+radius = 15.0
+height = 74.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4io5q"]
+atlas = ExtResource("3_r311c")
+region = Rect2(0, 0, 128, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ryfsh"]
+atlas = ExtResource("3_r311c")
+region = Rect2(128, 0, 128, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4yqaj"]
+atlas = ExtResource("3_r311c")
+region = Rect2(256, 0, 128, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7yw48"]
+atlas = ExtResource("3_r311c")
+region = Rect2(384, 0, 128, 58)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cjcaa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4io5q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ryfsh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4yqaj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7yw48")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_j50ox"]
+resource_name = "movement"
+length = 0.0833417
+loop_mode = 1
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0cc4d"]
+_data = {
+"movement": SubResource("Animation_j50ox")
+}
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_cy82r")
 speed = 500.0
 gravity = 9.8
 rotation_clamp = 10.0
-
-[node name="Icon" type="Sprite2D" parent="."]
-scale = Vector2(1, 0.453125)
-texture = ExtResource("1_g2kxu")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -25,5 +80,16 @@ shape = SubResource("CapsuleShape2D_1rxqh")
 [node name="Rotor" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_72fwg")
 volume_db = -10.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-27, -7)
+sprite_frames = SubResource("SpriteFrames_cjcaa")
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0cc4d")
+}
+autoplay = "movement"
 
 [connection signal="soldier_collected" from="." to="." method="_on_soldier_collected"]
