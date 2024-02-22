@@ -1,20 +1,93 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccamedb07wdd5"]
+[gd_scene load_steps=12 format=3 uid="uid://ccamedb07wdd5"]
 
-[ext_resource type="Texture2D" uid="uid://bng3b2m0cskmv" path="res://icon.svg" id="1_q6apc"]
+[ext_resource type="Texture2D" uid="uid://cni8ho83egtl7" path="res://sprites/tank-Sheet.png" id="2_3yian"]
+[ext_resource type="Texture2D" uid="uid://cfqu8l16snr5s" path="res://sprites/turret.png" id="2_67fqk"]
 [ext_resource type="AudioStream" uid="uid://butrx2myd4hu1" path="res://audio/sfx/Shooting.wav" id="3_3vi2a"]
 [ext_resource type="Script" path="res://tank/tank.gd" id="3_tj4ns"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ei2ff"]
+atlas = ExtResource("2_3yian")
+region = Rect2(0, 0, 128, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qakf"]
+atlas = ExtResource("2_3yian")
+region = Rect2(128, 0, 128, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3yy4"]
+atlas = ExtResource("2_3yian")
+region = Rect2(256, 0, 128, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyilv"]
+atlas = ExtResource("2_3yian")
+region = Rect2(384, 0, 128, 51)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h0k52"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ei2ff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6qakf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3yy4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyilv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="Animation" id="Animation_lunwj"]
+resource_name = "shoot"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.25, 1),
+"transitions": PackedFloat32Array(1, -2, 2, 1),
+"update": 0,
+"values": [Vector2(-6, -33), Vector2(-6, -25), Vector2(-6, -25), Vector2(-6, -33)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6rtao"]
+_data = {
+"shoot": SubResource("Animation_lunwj")
+}
 
 [node name="tank" type="Node2D"]
 script = ExtResource("3_tj4ns")
 
-[node name="Tank" type="Sprite2D" parent="."]
-texture = ExtResource("1_q6apc")
-
-[node name="Timer" type="Timer" parent="Tank"]
-wait_time = 3.0
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
 autostart = true
+
+[node name="Turret" type="Sprite2D" parent="."]
+position = Vector2(-6, -33)
+texture = ExtResource("2_67fqk")
+
+[node name="Tank" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_h0k52")
+autoplay = "default"
+frame_progress = 0.452193
 
 [node name="BulletShoot" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_3vi2a")
 
-[connection signal="timeout" from="Tank/Timer" to="." method="_on_timer_timeout"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Turret")
+libraries = {
+"": SubResource("AnimationLibrary_6rtao")
+}
+
+[node name="BulletMarker" type="Marker2D" parent="."]
+position = Vector2(-6, -58)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

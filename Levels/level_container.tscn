@@ -17,13 +17,13 @@ offset_bottom = 645.0
 script = ExtResource("2_ijxfe")
 
 [node name="Hangar" parent="." instance=ExtResource("2_ysakb")]
-position = Vector2(9, 158)
+position = Vector2(181, 254)
 
 [node name="ObjectGenerator" type="Area2D" parent="."]
 position = Vector2(758, 254)
 script = ExtResource("4_jsxh1")
-tree_count = 2
-soldier_count = 3
+tree_count = 4
+soldier_count = 1
 
 [node name="Bounds" type="CollisionShape2D" parent="ObjectGenerator"]
 position = Vector2(0, -22)

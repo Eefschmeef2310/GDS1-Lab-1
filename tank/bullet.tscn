@@ -1,24 +1,24 @@
 [gd_scene load_steps=4 format=3 uid="uid://lmobq74k4kml"]
 
 [ext_resource type="Script" path="res://tank/bullet.gd" id="1_e6xjo"]
-[ext_resource type="Texture2D" uid="uid://bng3b2m0cskmv" path="res://icon.svg" id="1_oki20"]
+[ext_resource type="Texture2D" uid="uid://3eux1c467l1j" path="res://sprites/bullet.png" id="2_lewp4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cvavs"]
-radius = 14.0
-height = 48.0
+radius = 12.0
+height = 50.0
 
 [node name="Bullet" type="Area2D" groups=["bullet"]]
 script = ExtResource("1_e6xjo")
+speed = 200.0
 
 [node name="Icon" type="Sprite2D" parent="."]
-scale = Vector2(0.21875, 0.375)
-texture = ExtResource("1_oki20")
+texture = ExtResource("2_lewp4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_cvavs")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-scale = Vector2(1.4, 2.4)
+scale = Vector2(1, 2.6)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

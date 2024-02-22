@@ -1,6 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://daoojve4dbtaf"]
+[gd_scene load_steps=4 format=3 uid="uid://daoojve4dbtaf"]
 
-[ext_resource type="Texture2D" uid="uid://bng3b2m0cskmv" path="res://icon.svg" id="1_ybpqe"]
+[ext_resource type="Texture2D" uid="uid://bcss3i8l31kc3" path="res://sprites/arrow.png" id="1_2k866"]
+
+[sub_resource type="Animation" id="Animation_drfjp"]
+resource_name = "default"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icon:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(576, 217), Vector2(608.01, 217), Vector2(576, 217)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hk6ho"]
+_data = {
+"default": SubResource("Animation_drfjp")
+}
 
 [node name="LevelCompleteUi" type="Control"]
 layout_mode = 3
@@ -11,6 +34,11 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Icon" type="Sprite2D" parent="."]
-modulate = Color(0.858824, 0.690196, 0, 1)
 position = Vector2(576, 217)
-texture = ExtResource("1_ybpqe")
+texture = ExtResource("1_2k866")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hk6ho")
+}
+autoplay = "default"
