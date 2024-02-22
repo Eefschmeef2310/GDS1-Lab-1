@@ -27,6 +27,11 @@ folder_colors={
 "res://ui/": "blue"
 }
 
+[gui]
+
+theme/custom="res://ui/default_theme.tres"
+theme/custom_font="res://ui/4077TH.TTF"
+
 [input]
 
 Left={

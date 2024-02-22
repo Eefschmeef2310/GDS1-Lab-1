@@ -14,7 +14,7 @@ func _ready():
 	player = get_tree().get_first_node_in_group("player")
 
 func _on_player_soldier_collected():
-	$Collected.text = "Soldiers carrying: " + str(player.soldiers_carrying)
+	$Collected.text = "SOLDIERS CARRYING: " + str(player.soldiers_carrying)
 	
 	$SoldierCollected.play()
 
@@ -23,14 +23,14 @@ func _on_player__on_obstacle_hit():
 
 func _on_hangar_soldier_dropped():
 	soldiers_returned += player.soldiers_carrying
-	$Returned.text = "Soldiers returned: " + str(soldiers_returned)
+	$Returned.text = "SOLDIERS RETURNED: " + str(soldiers_returned)
 	
 	game_over_timer.start(game_over_timer.time_left + soldier_time_increase)
 	
 	$SoldierReturned.play()
 
 func _process(_delta):
-	$TimeLeft.text = "TIME LEFT: " + str(int(game_over_timer.time_left)) + "s"
+	$TimeLeft.text = "TIME LEFT: " + str(int(game_over_timer.time_left)) + " SEC"
 
 func _on_game_over_timer_timeout():
 	_on_player__on_obstacle_hit()

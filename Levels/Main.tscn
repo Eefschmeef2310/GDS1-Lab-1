@@ -31,14 +31,14 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 63.0
 offset_bottom = 33.0
-text = "Soldiers collected: 0"
+text = "SOLDIERS CARRYING: 0"
 
 [node name="Returned" type="Label" parent="UI"]
 offset_left = 10.0
 offset_top = 40.0
 offset_right = 163.0
 offset_bottom = 63.0
-text = "Soldiers returned: 0"
+text = "SOLDIERS RETURNED: 0"
 
 [node name="TimeLeft" type="Label" parent="UI"]
 anchors_preset = 5
@@ -49,7 +49,7 @@ offset_top = 10.0
 offset_right = 56.0
 offset_bottom = 33.0
 grow_horizontal = 2
-text = "TIME LEFT: 60s"
+text = "TIME LEFT: 60 SEC"
 label_settings = SubResource("LabelSettings_6if2d")
 horizontal_alignment = 1
 vertical_alignment = 1
