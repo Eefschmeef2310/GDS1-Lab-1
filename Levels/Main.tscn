@@ -66,6 +66,9 @@ stream = ExtResource("7_ccbe1")
 
 [node name="LevelContainer" parent="." instance=ExtResource("1_d4k43")]
 
+[node name="VisibleOnScreenNotifier2D" parent="LevelContainer" index="4"]
+visible = false
+
 [node name="Player" parent="." instance=ExtResource("1_1qo66")]
 position = Vector2(206, 181)
 speed = 400.0
@@ -89,13 +92,14 @@ shape = SubResource("RectangleShape2D_s2djx")
 position = Vector2(572, 668)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Walls/Bottom"]
+position = Vector2(4, -106)
 shape = SubResource("RectangleShape2D_s2djx")
 
 [node name="Left" type="StaticBody2D" parent="Camera2D/Walls"]
 position = Vector2(-20, 324)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Walls/Left"]
-position = Vector2(2, 0)
+position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_fjjmu")
 
 [node name="Right" type="StaticBody2D" parent="Camera2D/Walls"]

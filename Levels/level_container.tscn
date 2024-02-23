@@ -1,20 +1,34 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhda8lqqc5002"]
+[gd_scene load_steps=11 format=3 uid="uid://dhda8lqqc5002"]
 
 [ext_resource type="Script" path="res://Levels/level.gd" id="1_07ib8"]
-[ext_resource type="Script" path="res://Levels/color_rect_test.gd" id="2_ijxfe"]
 [ext_resource type="PackedScene" uid="uid://bviilad5imam6" path="res://objects/hangar.tscn" id="2_ysakb"]
 [ext_resource type="Script" path="res://Levels/object_generator.gd" id="4_jsxh1"]
+[ext_resource type="Texture2D" uid="uid://s8ek55o6bq48" path="res://sprites/concrete.png" id="4_s5nq6"]
+[ext_resource type="Texture2D" uid="uid://dab806yfareoe" path="res://sprites/fence.png" id="5_hyjp8"]
+[ext_resource type="Texture2D" uid="uid://cu7tooreky55f" path="res://sprites/sand.png" id="6_t8vcr"]
+
+[sub_resource type="Gradient" id="Gradient_jv5le"]
+offsets = PackedFloat32Array(0, 0.323636)
+colors = PackedColorArray(0.8, 0.772549, 0.529412, 1, 0.521569, 0.721569, 0.364706, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_038hs"]
+frequency = 0.1045
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_iweol"]
+seamless = true
+color_ramp = SubResource("Gradient_jv5le")
+noise = SubResource("FastNoiseLite_038hs")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s31d0"]
-size = Vector2(788, 464)
+size = Vector2(738, 392)
 
 [node name="LevelContainer" type="Node2D"]
 script = ExtResource("1_07ib8")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 offset_right = 1152.0
-offset_bottom = 645.0
-script = ExtResource("2_ijxfe")
+offset_bottom = 648.0
+texture = SubResource("NoiseTexture2D_iweol")
 
 [node name="Hangar" parent="." instance=ExtResource("2_ysakb")]
 position = Vector2(181, 254)
@@ -26,17 +40,37 @@ tree_count = 4
 soldier_count = 1
 
 [node name="Bounds" type="CollisionShape2D" parent="ObjectGenerator"]
-position = Vector2(0, -22)
+position = Vector2(-28, 70)
 shape = SubResource("RectangleShape2D_s31d0")
 debug_color = Color(0, 0.701961, 0.313726, 0.419608)
 
 [node name="TankMarker" type="Marker2D" parent="."]
-position = Vector2(576, 569)
+position = Vector2(576, 600)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 process_mode = 4
 position = Vector2(576, 324.5)
 scale = Vector2(57.5, 32.25)
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Concrete" type="Sprite2D" parent="Sprites"]
+position = Vector2(576, 615.693)
+scale = Vector2(1, 0.514843)
+texture = ExtResource("4_s5nq6")
+
+[node name="Fence" type="Sprite2D" parent="Sprites"]
+position = Vector2(576, 563)
+texture = ExtResource("5_hyjp8")
+
+[node name="SandRight" type="Sprite2D" parent="Sprites"]
+position = Vector2(1142, 272)
+texture = ExtResource("6_t8vcr")
+
+[node name="SandLeft" type="Sprite2D" parent="Sprites"]
+position = Vector2(10, 272)
+rotation = 3.14159
+texture = ExtResource("6_t8vcr")
 
 [connection signal="soldier_dropped" from="Hangar" to="." method="_on_hangar_soldier_dropped"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

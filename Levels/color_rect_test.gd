@@ -1,4 +1,6 @@
-extends ColorRect
+extends TextureRect
 
 func _ready():
-	color = Color(randf(), randf(), randf(), 1.)
+	(texture as NoiseTexture2D).color_ramp.colors[1] = Color(randf(), randf(), randf(), 1.)
+	
+	#color = Color(randf(), randf(), randf(), 1.)

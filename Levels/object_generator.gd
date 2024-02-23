@@ -7,7 +7,7 @@ const TREE = preload("res://objects/tree.tscn")
 const SOLDIER = preload("res://Soldiers/Soldier.tscn")
 const TANK = preload("res://tank/tank.tscn")
 
-@onready var bounds = $Bounds
+@onready var bounds : Vector2
 @onready var tank_marker = $"../TankMarker"
 
 var circles : Array[Circle]
@@ -28,6 +28,9 @@ class Circle:
 		return false
 
 func generate_level():
+	bounds = $Bounds.get_shape().get_rect().size
+	print(bounds)
+	
 	#Generate trees
 	for i in tree_count:
 		instantiate_object(TREE)
@@ -40,9 +43,9 @@ func generate_level():
 	tank = TANK.instantiate()
 	tank.global_position = tank_marker.global_position
 	get_parent().add_child.call_deferred(tank)
-	get_parent().level_complete.connect(tank.destroy)
+	get_parent().level_complete.connect(tank.queue_free)
 
-#for debugging purposes
+#TODO for debugging purposes
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		reset()
@@ -58,8 +61,8 @@ func instantiate_object(object_to_create):
 	get_parent().add_child.call_deferred(object)
 	objects.append(object)
 
-func check_overlap(pos, tree : CollisionObject2D):
-	var new_circle = Circle.new(pos, max(tree.shape_owner_get_shape(0, 0).get_rect().size.y/2, tree.shape_owner_get_shape(0, 0).get_rect().size.x/2))
+func check_overlap(pos, object : CollisionObject2D):
+	var new_circle = Circle.new(pos, max(object.shape_owner_get_shape(0, 0).get_rect().size.y/2, object.shape_owner_get_shape(0, 0).get_rect().size.x/2))
 	for index in circles:
 		if index.intersects(new_circle):
 			return true
@@ -68,8 +71,8 @@ func check_overlap(pos, tree : CollisionObject2D):
 	
 func get_random_position():
 	#Gets a random position within the collision shape
-	return Vector2(randf_range(-bounds.get_shape().get_rect().size.x/2, bounds.get_shape().get_rect().size.x/2), 
-				   randf_range(-bounds.get_shape().get_rect().size.y/2, bounds.get_shape().get_rect().size.y/2))
+	return Vector2(randf_range(-bounds.x/2, bounds.x/2), 
+				   randf_range(-bounds.y/2, bounds.y/2))
 				
 func reset():
 	for i in objects:

@@ -12,11 +12,6 @@ func _ready():
 	
 func _process(delta):
 	global_position.x = lerp(global_position.x, player.global_position.x, speed * delta)
-	
-	
-	
-func destroy():
-	queue_free()
 
 func _on_timer_timeout():
 	var bullet = BULLET.instantiate()
