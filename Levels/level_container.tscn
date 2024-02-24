@@ -25,7 +25,8 @@ position = Vector2(181, 303)
 [node name="ObjectGenerator" type="Area2D" parent="."]
 position = Vector2(758, 254)
 script = ExtResource("4_jsxh1")
-soldier_count = 1
+tree_count = 5
+soldier_count = 4
 
 [node name="Bounds" type="CollisionShape2D" parent="ObjectGenerator"]
 position = Vector2(-68, 70)

@@ -36,3 +36,6 @@ func _on_game_over_timer_timeout():
 
 func level_container_complete():
 	game_over_timer.start(clamp(game_over_timer.time_left + level_container_completer_time_increase, 0, max_timer))
+	
+	for i in get_tree().get_nodes_in_group("bullet"):
+		i.queue_free()
