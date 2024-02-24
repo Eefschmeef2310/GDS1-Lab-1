@@ -1,10 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://0dtbc1fdtehg"]
+[gd_scene load_steps=3 format=3 uid="uid://0dtbc1fdtehg"]
 
 [ext_resource type="Script" path="res://menus/game_over.gd" id="1_qamp4"]
 [ext_resource type="AudioStream" uid="uid://dc6ra4vvpytfu" path="res://audio/sfx/crashing-pixabay.mp3" id="2_mx4r6"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_1lpw0"]
-font_size = 150
 
 [node name="GameOver" type="Control"]
 process_mode = 3
@@ -25,52 +22,61 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.133333, 0.133333, 0.133333, 0.619608)
 
-[node name="GAME OVER" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 30.0
-offset_bottom = 235.0
-grow_horizontal = 2
-text = "GAME OVER"
-label_settings = SubResource("LabelSettings_1lpw0")
-horizontal_alignment = 1
-
-[node name="Restart" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-text = "Restart"
-
-[node name="Menu" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -92.0
-offset_top = 76.0
-offset_right = 92.0
-offset_bottom = 153.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-text = "Menu"
-
 [node name="GameOver" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_mx4r6")
 autoplay = true
 
-[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -657.5
+offset_top = -283.5
+offset_right = 657.5
+offset_bottom = 283.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_right = 200
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 60
+
+[node name="GAME OVER" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 150
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "ONLY X AWAY FROM A HIGH SCORE!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_right = 200
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Restart" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "RESTART"
+
+[node name="Menu" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "MENU"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Menu" to="." method="_on_menu_pressed"]

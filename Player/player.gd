@@ -8,10 +8,15 @@ signal _on_obstacle_hit()
 @export var heaviness_scale : float = 75
 @export var rotation_clamp : float = 20
 
+@onready var soldier_carry_bar = $SoldierCarryBar
+
 var soldiers_carrying : int:
 	set(value):
 		soldiers_carrying = value
 		soldier_collected.emit()
+		
+		#update bar
+		soldier_carry_bar.update(value)
 
 func _process(delta):
 	var direction = Input.get_vector("Left", "Right", "Up", "Down")

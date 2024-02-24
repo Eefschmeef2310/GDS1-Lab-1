@@ -1,15 +1,31 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhr3sshyyj6og"]
+[gd_scene load_steps=17 format=3 uid="uid://bhr3sshyyj6og"]
 
 [ext_resource type="PackedScene" uid="uid://b24wal0nj1boq" path="res://Player/Player.tscn" id="1_1qo66"]
 [ext_resource type="PackedScene" uid="uid://dhda8lqqc5002" path="res://Levels/level_container.tscn" id="1_d4k43"]
 [ext_resource type="Script" path="res://Levels/main.gd" id="1_r1k2k"]
+[ext_resource type="Script" path="res://ui/time_left.gd" id="3_qtjox"]
 [ext_resource type="Script" path="res://Levels/ui.gd" id="4_jucwd"]
 [ext_resource type="AudioStream" uid="uid://bv1mab4ykf58f" path="res://audio/sfx/click-menu-app-universfield-pixabay.mp3" id="6_lnyes"]
 [ext_resource type="AudioStream" uid="uid://cs2lenk26inqf" path="res://audio/sfx/click-game-menu-universfield-pixabay.mp3" id="7_ccbe1"]
 [ext_resource type="Script" path="res://Levels/camera.gd" id="7_kjuxp"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_6if2d"]
-font_size = 30
+[sub_resource type="Gradient" id="Gradient_kpyjx"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.228454, 0.228454, 0.228454, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jroev"]
+gradient = SubResource("Gradient_kpyjx")
+
+[sub_resource type="Gradient" id="Gradient_53u6v"]
+colors = PackedColorArray(0.567887, 0.567887, 0.567887, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_u6sjd"]
+gradient = SubResource("Gradient_53u6v")
+
+[sub_resource type="Gradient" id="Gradient_gb56u"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.2, 0.5)
+colors = PackedColorArray(0.909804, 0.231373, 0.231373, 1, 0.976471, 0.760784, 0.168627, 1, 0.568627, 0.858824, 0.411765, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s2djx"]
 size = Vector2(1152, 39)
@@ -26,36 +42,38 @@ script = ExtResource("1_r1k2k")
 [node name="UI" type="CanvasLayer" parent="." groups=["ui"]]
 script = ExtResource("4_jucwd")
 
-[node name="Collected" type="Label" parent="UI"]
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 63.0
-offset_bottom = 33.0
-text = "SOLDIERS CARRYING: 0"
-
 [node name="Returned" type="Label" parent="UI"]
-offset_left = 10.0
-offset_top = 40.0
-offset_right = 163.0
-offset_bottom = 63.0
-text = "SOLDIERS RETURNED: 0"
-
-[node name="TimeLeft" type="Label" parent="UI"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -56.0
-offset_top = 10.0
-offset_right = 56.0
-offset_bottom = 33.0
+offset_left = -101.5
+offset_top = -9.0
+offset_right = 101.5
+offset_bottom = 82.0
 grow_horizontal = 2
-text = "TIME LEFT: 60 SEC"
-label_settings = SubResource("LabelSettings_6if2d")
+theme_override_font_sizes/font_size = 70
+text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GameOverTimer" type="Timer" parent="UI"]
-wait_time = 60.0
+[node name="TimeLeft" type="TextureProgressBar" parent="UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -135.0
+offset_top = 77.0
+offset_right = 135.0
+offset_bottom = 100.0
+grow_horizontal = 2
+value = 100.0
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture1D_jroev")
+texture_progress = SubResource("GradientTexture1D_u6sjd")
+script = ExtResource("3_qtjox")
+gradient = SubResource("Gradient_gb56u")
+
+[node name="GameOverTimer" type="Timer" parent="UI/TimeLeft"]
+wait_time = 120.0
 autostart = true
 
 [node name="SoldierCollected" type="AudioStreamPlayer" parent="UI"]
@@ -65,6 +83,9 @@ stream = ExtResource("6_lnyes")
 stream = ExtResource("7_ccbe1")
 
 [node name="LevelContainer" parent="." instance=ExtResource("1_d4k43")]
+
+[node name="Background" parent="LevelContainer" index="0"]
+metadata/_edit_lock_ = true
 
 [node name="VisibleOnScreenNotifier2D" parent="LevelContainer" index="4"]
 visible = false
@@ -92,7 +113,7 @@ shape = SubResource("RectangleShape2D_s2djx")
 position = Vector2(572, 668)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Walls/Bottom"]
-position = Vector2(4, -106)
+position = Vector2(4, -74)
 shape = SubResource("RectangleShape2D_s2djx")
 
 [node name="Left" type="StaticBody2D" parent="Camera2D/Walls"]
@@ -109,15 +130,7 @@ position = Vector2(1169, 324)
 position = Vector2(2, 0)
 shape = SubResource("RectangleShape2D_hrlju")
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-visible = false
-rotation = 0.82205
-energy = 0.33
-shadow_enabled = true
-shadow_filter = 1
-shadow_filter_smooth = 6.6
-
-[connection signal="timeout" from="UI/GameOverTimer" to="UI" method="_on_game_over_timer_timeout"]
+[connection signal="timeout" from="UI/TimeLeft/GameOverTimer" to="UI" method="_on_game_over_timer_timeout"]
 [connection signal="_on_obstacle_hit" from="Player" to="UI" method="_on_player__on_obstacle_hit"]
 [connection signal="soldier_collected" from="Player" to="UI" method="_on_player_soldier_collected"]
 

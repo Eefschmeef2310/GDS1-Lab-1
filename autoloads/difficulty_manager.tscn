@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjc6ivqamakub"]
+
+[ext_resource type="Script" path="res://autoloads/difficulty_manager.gd" id="1_v000y"]
+
+[node name="DifficultyManager" type="Node"]
+script = ExtResource("1_v000y")

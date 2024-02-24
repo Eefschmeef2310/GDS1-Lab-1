@@ -29,7 +29,6 @@ class Circle:
 
 func generate_level():
 	bounds = $Bounds.get_shape().get_rect().size
-	print(bounds)
 	
 	#Generate trees
 	for i in tree_count:

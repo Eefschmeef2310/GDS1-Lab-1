@@ -1,5 +1,10 @@
 extends Control
 
+func _ready():
+	for i in get_tree().get_nodes_in_group("bullet"):
+		i.queue_free()
+	$"MarginContainer/VBoxContainer/High Score".text = "HIGH SCORE: " + str(SaveManager.save_game.high_score)
+
 func _on_quit_pressed():
 	get_tree().quit()
 

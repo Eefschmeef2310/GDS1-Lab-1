@@ -1,26 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://dhda8lqqc5002"]
+[gd_scene load_steps=9 format=3 uid="uid://dhda8lqqc5002"]
 
 [ext_resource type="Script" path="res://Levels/level.gd" id="1_07ib8"]
+[ext_resource type="Texture2D" uid="uid://cma5cw8ehgo4l" path="res://sprites/background.tres" id="2_nmoqe"]
 [ext_resource type="PackedScene" uid="uid://bviilad5imam6" path="res://objects/hangar.tscn" id="2_ysakb"]
 [ext_resource type="Script" path="res://Levels/object_generator.gd" id="4_jsxh1"]
 [ext_resource type="Texture2D" uid="uid://s8ek55o6bq48" path="res://sprites/concrete.png" id="4_s5nq6"]
 [ext_resource type="Texture2D" uid="uid://dab806yfareoe" path="res://sprites/fence.png" id="5_hyjp8"]
 [ext_resource type="Texture2D" uid="uid://cu7tooreky55f" path="res://sprites/sand.png" id="6_t8vcr"]
 
-[sub_resource type="Gradient" id="Gradient_jv5le"]
-offsets = PackedFloat32Array(0, 0.323636)
-colors = PackedColorArray(0.8, 0.772549, 0.529412, 1, 0.521569, 0.721569, 0.364706, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_038hs"]
-frequency = 0.1045
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_iweol"]
-seamless = true
-color_ramp = SubResource("Gradient_jv5le")
-noise = SubResource("FastNoiseLite_038hs")
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s31d0"]
-size = Vector2(738, 392)
+size = Vector2(818, 392)
 
 [node name="LevelContainer" type="Node2D"]
 script = ExtResource("1_07ib8")
@@ -28,19 +17,18 @@ script = ExtResource("1_07ib8")
 [node name="Background" type="TextureRect" parent="."]
 offset_right = 1152.0
 offset_bottom = 648.0
-texture = SubResource("NoiseTexture2D_iweol")
+texture = ExtResource("2_nmoqe")
 
 [node name="Hangar" parent="." instance=ExtResource("2_ysakb")]
-position = Vector2(181, 254)
+position = Vector2(181, 303)
 
 [node name="ObjectGenerator" type="Area2D" parent="."]
 position = Vector2(758, 254)
 script = ExtResource("4_jsxh1")
-tree_count = 4
 soldier_count = 1
 
 [node name="Bounds" type="CollisionShape2D" parent="ObjectGenerator"]
-position = Vector2(-28, 70)
+position = Vector2(-68, 70)
 shape = SubResource("RectangleShape2D_s31d0")
 debug_color = Color(0, 0.701961, 0.313726, 0.419608)
 
@@ -60,6 +48,7 @@ scale = Vector2(1, 0.514843)
 texture = ExtResource("4_s5nq6")
 
 [node name="Fence" type="Sprite2D" parent="Sprites"]
+z_index = 1
 position = Vector2(576, 563)
 texture = ExtResource("5_hyjp8")
 
