@@ -42,7 +42,7 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 15
+theme_override_constants/separation = 10
 
 [node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -71,12 +71,17 @@ theme_override_constants/margin_right = 150
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 20
 
 [node name="Play" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "PLAY"
+
+[node name="CREDITS" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "CREDITS"
 
 [node name="Quit" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -84,4 +89,5 @@ theme_override_font_sizes/font_size = 50
 text = "QUIT"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/CREDITS" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
