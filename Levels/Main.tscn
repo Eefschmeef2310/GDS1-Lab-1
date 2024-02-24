@@ -73,7 +73,7 @@ script = ExtResource("3_qtjox")
 gradient = SubResource("Gradient_gb56u")
 
 [node name="GameOverTimer" type="Timer" parent="UI/TimeLeft"]
-wait_time = 120.0
+wait_time = 60.0
 autostart = true
 
 [node name="SoldierCollected" type="AudioStreamPlayer" parent="UI"]

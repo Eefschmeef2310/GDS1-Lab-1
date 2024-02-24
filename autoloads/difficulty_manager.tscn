@@ -1,6 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjc6ivqamakub"]
+[gd_scene load_steps=5 format=3 uid="uid://bjc6ivqamakub"]
 
 [ext_resource type="Script" path="res://autoloads/difficulty_manager.gd" id="1_v000y"]
 
+[sub_resource type="Curve" id="Curve_vnlks"]
+_data = [Vector2(0, 0.2), 0.0, 0.0, 0, 1, Vector2(0.2, 0.2), 0.0, 1.0, 1, 1, Vector2(0.4, 0.4), 1.0, 1.0, 1, 1, Vector2(0.6, 0.6), 1.0, 1.0, 1, 1, Vector2(0.8, 0.8), 1.0, 0.0451583, 1, 0, Vector2(1, 1), 1.0, 0.0, 1, 0]
+point_count = 6
+
+[sub_resource type="Curve" id="Curve_mjx62"]
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(0.2, 0.2), 1.0, 1.0, 1, 1, Vector2(0.4, 0.4), 1.0, 3.0, 1, 1, Vector2(0.6, 1), 3.0, 3.0, 1, 1, Vector2(0.8, 1.6), 3.0, 2.0, 1, 1, Vector2(1, 2), 2.0, 0.0, 1, 0]
+point_count = 6
+
+[sub_resource type="Curve" id="Curve_r3itl"]
+_data = [Vector2(0, 0.6), 0.0, -0.4, 0, 1, Vector2(1, 0.2), -0.4, 0.0, 1, 0]
+point_count = 2
+
 [node name="DifficultyManager" type="Node"]
 script = ExtResource("1_v000y")
+soldier_curve = SubResource("Curve_vnlks")
+tree_curve = SubResource("Curve_mjx62")
+tank_shoot_speed_curve = SubResource("Curve_r3itl")

@@ -15,6 +15,7 @@ script = ExtResource("1_ieh4o")
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_m0twg")
+autoplay = true
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1

@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cu7tooreky55f" path="res://sprites/sand.png" id="6_t8vcr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s31d0"]
-size = Vector2(818, 392)
+size = Vector2(729, 392)
 
 [node name="LevelContainer" type="Node2D"]
 script = ExtResource("1_07ib8")
@@ -25,11 +25,9 @@ position = Vector2(181, 303)
 [node name="ObjectGenerator" type="Area2D" parent="."]
 position = Vector2(758, 254)
 script = ExtResource("4_jsxh1")
-tree_count = 5
-soldier_count = 4
 
 [node name="Bounds" type="CollisionShape2D" parent="ObjectGenerator"]
-position = Vector2(-68, 70)
+position = Vector2(-112.5, 70)
 shape = SubResource("RectangleShape2D_s31d0")
 debug_color = Color(0, 0.701961, 0.313726, 0.419608)
 

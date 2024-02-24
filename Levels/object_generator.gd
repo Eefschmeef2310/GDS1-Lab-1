@@ -1,8 +1,5 @@
 extends Area2D
 
-@export var tree_count : int
-@export var soldier_count : int
-
 const TREE = preload("res://objects/tree.tscn")
 const SOLDIER = preload("res://Soldiers/Soldier.tscn")
 const TANK = preload("res://tank/tank.tscn")
@@ -31,11 +28,11 @@ func generate_level():
 	bounds = $Bounds.get_shape().get_rect().size
 	
 	#Generate trees
-	for i in tree_count:
+	for i in DifficultyManager.get_tree_spawn_amount():
 		instantiate_object(TREE)
 		
 	#Generate soldiers
-	for i in soldier_count:
+	for i in DifficultyManager.get_soldier_spawn_amount():
 		instantiate_object(SOLDIER)
 		
 	#Generate tank

@@ -20,3 +20,5 @@ func _on_timer_timeout():
 	
 	$BulletShoot.play()
 	$AnimationPlayer.play("shoot")
+	
+	timer.start(DifficultyManager.get_tank_shoot_speed())
