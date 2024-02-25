@@ -15,8 +15,13 @@ size = Vector2(729, 392)
 script = ExtResource("1_07ib8")
 
 [node name="Background" type="TextureRect" parent="."]
-offset_right = 1152.0
-offset_bottom = 648.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1151.0
+offset_bottom = 647.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_nmoqe")
 
 [node name="Hangar" parent="." instance=ExtResource("2_ysakb")]

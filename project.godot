@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="GDS1 Week One"
+config/name="24428486 - GDS1 Lab 1"
 run/main_scene="res://menus/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://sprites/icon.png"
 
 [autoload]
 
@@ -21,6 +21,11 @@ RestartManager="*res://autoloads/restart_manager.gd"
 SaveManager="*res://autoloads/save_manager.gd"
 DifficultyManager="*res://autoloads/difficulty_manager.tscn"
 PostProcessingCrt="*res://autoloads/post_processing_crt.tscn"
+
+[display]
+
+window/size/mode=3
+window/stretch/mode="canvas_items"
 
 [file_customization]
 
@@ -75,3 +80,4 @@ Restart={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+anti_aliasing/quality/screen_space_aa=1
