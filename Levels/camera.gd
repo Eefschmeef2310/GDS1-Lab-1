@@ -15,7 +15,11 @@ func _process(_delta):
 	if moving:
 		position.x = player.position.x
 		position.x = clamp(position.x, middle_point, middle_point + get_viewport_rect().size.x)
+		
+		#Spawn next level when halfway between
+		if position.x >= middle_point + get_viewport_rect().size.x / 2:
+			get_parent().generate_level.emit()
+		
 		if position.x == middle_point + get_viewport_rect().size.x:
 			moving = false
-			get_parent().generate_level.emit()
 			middle_point += get_viewport_rect().size.x

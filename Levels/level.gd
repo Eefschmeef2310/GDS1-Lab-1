@@ -19,6 +19,8 @@ func generate_objects():
 
 func _on_hangar_soldier_dropped():
 	if !get_tree().get_nodes_in_group("soldier").size():
-		add_child(LEVEL_COMPLETE_UI.instantiate())
+		var level_complete_ui = LEVEL_COMPLETE_UI.instantiate()
+		level_complete_ui.position += get_viewport_rect().size / 2
+		add_child(level_complete_ui)
 		DifficultyManager.levels_cleared += 1
 		level_complete.emit()

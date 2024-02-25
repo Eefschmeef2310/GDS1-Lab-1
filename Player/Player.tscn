@@ -8,7 +8,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1rxqh"]
 radius = 15.0
-height = 74.0
+height = 108.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4io5q"]
 atlas = ExtResource("3_r311c")
@@ -86,8 +86,25 @@ shape = SubResource("CapsuleShape2D_1rxqh")
 stream = ExtResource("3_72fwg")
 volume_db = -10.0
 
+[node name="SoldierCarryBar" type="TextureProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -32.0
+offset_right = 46.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+fill_mode = 4
+texture_progress = ExtResource("4_wx3u0")
+script = ExtResource("5_hlpbe")
+metadata/_edit_use_anchors_ = true
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-27, -7)
+position = Vector2(-11, -7)
 sprite_frames = SubResource("SpriteFrames_cjcaa")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -99,23 +116,6 @@ autoplay = "movement"
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 visible = false
 occluder = SubResource("OccluderPolygon2D_jc36s")
-
-[node name="SoldierCarryBar" type="TextureProgressBar" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -32.0
-offset_top = -32.0
-offset_right = 32.0
-offset_bottom = 32.0
-grow_horizontal = 2
-grow_vertical = 2
-fill_mode = 4
-texture_progress = ExtResource("4_wx3u0")
-script = ExtResource("5_hlpbe")
-metadata/_edit_use_anchors_ = true
 
 [connection signal="soldier_collected" from="." to="." method="_on_soldier_collected"]
 [connection signal="soldier_collected" from="." to="SoldierCarryBar" method="_on_player_soldier_collected"]
