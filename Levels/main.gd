@@ -11,6 +11,8 @@ func _ready():
 	
 	for i in get_tree().get_nodes_in_group("bullet"):
 		i.queue_free()
+		
+	DifficultyManager.levels_cleared = 0
 
 func _on_level_container_level_complete():
 	$UI.level_container_complete()
