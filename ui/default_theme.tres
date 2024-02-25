@@ -2,6 +2,6 @@
 
 [resource]
 Label/colors/font_shadow_color = Color(0, 0, 0, 1)
-Label/constants/shadow_offset_x = 4
-Label/constants/shadow_offset_y = 3
-Label/constants/shadow_outline_size = 5
+Label/constants/shadow_offset_x = 2
+Label/constants/shadow_offset_y = 2
+Label/constants/shadow_outline_size = 2
