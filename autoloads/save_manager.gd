@@ -19,3 +19,4 @@ func load_save():
 func update_score(amount):
 	if save_game.high_score < amount:
 			save_game.high_score = amount
+			save()
