@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 RestartManager="*res://autoloads/restart_manager.gd"
 SaveManager="*res://autoloads/save_manager.gd"
 DifficultyManager="*res://autoloads/difficulty_manager.tscn"
+PostProcessingCrt="*res://autoloads/post_processing_crt.tscn"
 
 [file_customization]
 

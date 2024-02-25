@@ -46,7 +46,7 @@ uniform bool clip_warp = false;
 uniform float vignette_intensity = 0.4; // Size of the vignette, how far towards the middle it should go.
 uniform float vignette_opacity : hint_range(0.0, 1.0) = 0.5;
 
-//uniform sampler2D TEXTURE : hint_screen_texture;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
 
 // Used by the noise functin to generate a pseudo random value between 0.0 and 1.0
 vec2 random(vec2 uv){
@@ -128,18 +128,18 @@ void fragment()
 		// If roll is true distort the texture with roll_uv. The texture is split up into RGB to 
 		// make some chromatic aberration. We apply the aberration to the red and green channels accorging to the aberration parameter
 		// and intensify it a bit in the roll distortion.
-		text.r = texture(TEXTURE, text_uv + roll_uv * 0.8 + vec2(aberration, 0.0) * .1).r;
-		text.g = texture(TEXTURE, text_uv + roll_uv * 1.2 - vec2(aberration, 0.0) * .1 ).g;
-		text.b = texture(TEXTURE, text_uv + roll_uv).b;
+		text.r = texture(SCREEN_TEXTURE, text_uv + roll_uv * 0.8 + vec2(aberration, 0.0) * .1).r;
+		text.g = texture(SCREEN_TEXTURE, text_uv + roll_uv * 1.2 - vec2(aberration, 0.0) * .1 ).g;
+		text.b = texture(SCREEN_TEXTURE, text_uv + roll_uv).b;
 		text.a = 1.0;
 	}
 	else
 	{
 		// If roll is false only apply the aberration without any distorion. The aberration values are very small so the .1 is only 
 		// to make the slider in the Inspector less sensitive.
-		text.r = texture(TEXTURE, text_uv + vec2(aberration, 0.0) * .1).r;
-		text.g = texture(TEXTURE, text_uv - vec2(aberration, 0.0) * .1).g;
-		text.b = texture(TEXTURE, text_uv).b;
+		text.r = texture(SCREEN_TEXTURE, text_uv + vec2(aberration, 0.0) * .1).r;
+		text.g = texture(SCREEN_TEXTURE, text_uv - vec2(aberration, 0.0) * .1).g;
+		text.b = texture(SCREEN_TEXTURE, text_uv).b;
 		text.a = 1.0;
 	}
 	

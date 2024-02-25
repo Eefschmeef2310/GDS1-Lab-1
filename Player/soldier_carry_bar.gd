@@ -9,7 +9,7 @@ func update(amount):
 			rotor.pitch_scale = 1.
 		1:
 			value = 35
-			modulate = "#91db69"
+			modulate = "#61e548"
 			rotor.pitch_scale = 0.9
 		2:
 			value = 65
